@@ -1,7 +1,8 @@
 <?php
+  include("includes/config.php");
   include("includes/classes/Constants.php");
   include("includes/classes/Account.php");
-  $account = new Account();
+  $account = new Account($con);
   
   include("includes/handlers/register-handler.php");
   include("includes/handlers/login-handler.php");
@@ -28,6 +29,7 @@
     <form id="loginForm" action="register.php" method="POST">
       <h2>Log in to your account</h2>
       <p>
+        <?php echo $account->getError(Constants::$loginFailed) ?>
         <label for="loginUsername">Username</label>
         <input type="text" id="username" name="loginUsername" placeholder="e.g. dr-dingle" required value="<?php getInputValue('loginUsername'); ?>">
       </p>
@@ -42,6 +44,7 @@
       <h2>Create your free account</h2>
       <p>
         <?php echo $account->getError(Constants::$usernameLen) ?>
+        <?php echo $account->getError(Constants::$usernameTaken) ?>
         <label for="registerUsername">Username</label>
         <input type="text" id="username" name="registerUsername" placeholder="e.g. dr-dingle" required value="<?php getInputValue('registerUsername'); ?>">
       </p>
@@ -57,6 +60,7 @@
       </p>
       <p>
         <?php echo $account->getError(Constants::$emailInvalid) ?>
+        <?php echo $account->getError(Constants::$emailTaken) ?>
         <label for="email">Email</label>
         <input type="email" id="email" name="email" placeholder="e.g. bdskat@web.md" required value="<?php getInputValue('email'); ?>">
       </p>

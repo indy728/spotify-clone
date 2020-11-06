@@ -1,9 +1,24 @@
 <?php
   class Account {
+    private $con;
     private $errorArray;
 
-    public function __construct() {
+    public function __construct($con) {
+      $this->con = $con;
       $this->errorArray = array();
+    }
+
+    public function login($username, $password) {
+      $password = md5($password);
+
+      $query = mysqli_query($this->con, "SELECT * FROM users WHERE username='$username' AND password='$password'");
+
+      if(mysqli_num_rows($query) == 1) {
+        return true;
+      } else {
+        array_push($this->errorArray, Constants::$loginFailed);
+        return false;
+      }
     }
 
     public function register($un, $fn, $ln, $e1, $e2, $p1, $p2) {
@@ -14,10 +29,19 @@
       $this->validatePasswords($p1, $p2);
 
       if(empty($this->errorArray) == true) {
-        return true;
+        // Insert to db
+
+        return $this->insertUserDetails($un, $fn, $ln, $e1, $p1);
       } else {
         return false;
       }
+    }
+
+    private function insertUserDetails($un, $fn, $ln, $email, $password) {
+      $encryptedPw = md5($password);
+      $profilePic = "assets/img/profile-pics/my-face.jpg";
+      $date = date("Y-m-d");
+      return mysqli_query($this->con, "INSERT INTO users VALUES (NULL, '$un', '$fn', '$ln', '$email', '$encryptedPw', '$date', '$profilePic')");
     }
 
     public function getError($error) {
@@ -32,7 +56,11 @@
         array_push($this->errorArray, Constants::$usernameLen);
         return;
       }
-      // TODO: check if username exists
+
+      $checkUsernameQuery = mysqli_query($this->con, "SELECT username FROM users WHERE username='$username'");
+      if (mysqli_num_rows($checkUsernameQuery) != 0) {
+        array_push($this->errorArray, Constants::$usernameTaken);
+      }
     }
     private function validatefirstName($firstName) {
       if(strlen($firstName) > 20 || strlen($firstName) < 2) {
@@ -56,7 +84,11 @@
         return;
       }
 
-      // TODO: check if email exists
+      $checkEmailQuery = mysqli_query($this->con, "SELECT email FROM users WHERE email='$e1'");
+      
+      if (mysqli_num_rows($checkEmailQuery) != 0) {
+        array_push($this->errorArray, Constants::$emailTaken);
+      }
     }
     private function validatePasswords($p1, $p2) {
       if($p1 != $p2) {
