@@ -135,3 +135,57 @@ html, body {
 #nowPlayingRight .volume-bar .progress-bar {
   width: 125px;
 }
+
+#topContainer {
+  min-height: 100%;
+  width: 100%;
+}
+
+#navBarContainer {
+  background-color: #000;
+  width: 220px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+#navBarContainer.nav-bar {
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+}
+
+#navBarContainer .nav-bar .logo {
+  width: 48px;
+  margin: 15px;
+}
+
+.nav-bar .group {
+  border-top: 1px solid #a0a0a0;
+  padding: 10px 7px;
+}
+
+.nav-bar .nav-item {
+  padding: 10px 0;
+  font-size: 14px;
+  font-weight: 700;
+  display: block;
+  letter-spacing: 1px;
+  position: relative;
+}
+
+.nav-bar .nav-item__link {
+  color: #a0a0a0;
+  text-decoration: none;
+}
+
+.nav-item__link .icon {
+  position: absolute;
+  right: 0;
+}
+
+.nav-item__link:hover {
+  color: #fff;
+  transform: translateY(-10px) scale(1.1);
+}
