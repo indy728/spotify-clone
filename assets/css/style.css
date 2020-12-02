@@ -1,0 +1,137 @@
+html, body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+
+* {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #fff;
+}
+
+#nowPlayingBarContainer {
+  width: 100%;
+  background-color: #202020;
+  bottom: 0;
+  position: fixed;
+  min-width: 620px;
+}
+
+#nowPlayingBar {
+  display: flex;
+  height: 98px;
+  padding: 16px;
+  box-sizing: border-box;
+  justify-content: space-between;
+}
+
+#nowPlayingLeft, #nowPlayingRight {
+  width: 30%;
+  min-width: 180px;
+}
+
+#nowPlayingCenter {
+  flex: 1;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+}
+
+#nowPlaying.content {
+  width: 100%;
+  height: 57px;
+}
+
+.buttons {
+  margin: 0 auto;
+  display: table;
+}
+
+.control-button {
+  vertical-align: middle;
+  background-color: transparent;
+  border: none;
+  width: 32px
+}
+
+.control-button:hover {
+  cursor: pointer;
+};
+.control-button:not(:first-child) {
+  margin-left: 5px;
+}
+
+.control-button.play,
+.control-button.pause {
+  width: 44px;
+}
+
+.progress-time {
+  color: #a0a0a0;
+  font-size: 12px;
+  min-width: 40px;
+  text-align: center;
+}
+
+.playback-bar {
+  display: flex;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 12px;
+  display: inline-flex;
+  cursor: pointer;
+}
+
+.progress-bar-bg {
+  background-color: #404040;
+  height: 4px;
+  width: 100%;
+  border-radius: 2px;
+  margin: auto;
+}
+
+.progress {
+  background-color: #a0a0a0;
+  height: 4px;
+  width: 0;
+  border-radius: 2px;
+}
+
+.album-link img {
+  height: 100%;
+  max-width: 57px;
+  margin-right: 13px;
+  float: left;
+  background-size: cover;
+}
+
+#nowPlayingLeft .track-info {
+  display: table;
+}
+
+#nowPlayingLeft .track-name span{
+  margin: 6px 0;
+  display: inline-block;
+  width: 100%;
+}
+
+#nowPlayingLeft .artist-name span{
+  font-size: 12px;
+  color: #a0a0a0;
+}
+
+#nowPlayingRight {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+#nowPlayingRight .volume-bar {
+  /* width: 100%; */
+}
+
+#nowPlayingRight .volume-bar .progress-bar {
+  width: 125px;
+}
